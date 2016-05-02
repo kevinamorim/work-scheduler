@@ -16,7 +16,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".main.WorkersActivity" />
-        <activity android:name=".main.AddWorkerActivity"></activity>
+        <activity android:name=".main.AddWorkerActivity" />
+        <activity android:name=".main.CalendarActivity"></activity>
     </application>
 
 </manifest>
