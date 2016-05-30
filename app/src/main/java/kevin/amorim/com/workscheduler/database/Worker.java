@@ -1,5 +1,8 @@
 package kevin.amorim.com.workscheduler.database;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Worker {
 
     public static final String TABLE_NAME = "workers";
@@ -10,6 +13,16 @@ public class Worker {
     private int id;
     private String name;
     private int workHours;
+
+    public static final Map<String, String> getValuesMap() {
+        Map<String, String> values = new HashMap<>();
+
+        values.put(Worker.COLUMN_ID, "INTEGER PRIMARY KEY");
+        values.put(Worker.COLUMN_NAME, "TEXT");
+        values.put(Worker.COLUMN_WORK_HOURS, "INTEGER");
+
+        return values;
+    }
 
     public Worker() {
 
