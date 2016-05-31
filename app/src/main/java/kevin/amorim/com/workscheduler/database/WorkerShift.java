@@ -2,23 +2,27 @@ package kevin.amorim.com.workscheduler.database;
 
 public class WorkerShift {
 
+    /*
+        Database fields
+     */
+
     private int id;
-    private Worker worker;
-    private Shift shift;
+    private int workerId;
+    private int shiftId;
 
     public WorkerShift() {
 
     }
 
-    public WorkerShift(int id, Worker worker, Shift shift) {
+    public WorkerShift(int id, int workerId, int shiftId) {
         this.id = id;
-        this.worker = worker;
-        this.shift = shift;
+        this.workerId = workerId;
+        this.shiftId = shiftId;
     }
 
-    public WorkerShift(Worker worker, Shift shift) {
-        this.worker = worker;
-        this.shift = shift;
+    public WorkerShift(int workerId, int shiftId) {
+        this.workerId = workerId;
+        this.shiftId = shiftId;
     }
 
 }

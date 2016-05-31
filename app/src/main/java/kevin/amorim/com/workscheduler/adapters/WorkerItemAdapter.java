@@ -1,4 +1,4 @@
-package kevin.amorim.com.workscheduler.main;
+package kevin.amorim.com.workscheduler.adapters;
 
 import android.app.Activity;
 import android.content.Context;

@@ -9,6 +9,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import kevin.amorim.com.workscheduler.R;
+import kevin.amorim.com.workscheduler.adapters.WorkerItemAdapter;
 import kevin.amorim.com.workscheduler.database.DbHelper;
 import kevin.amorim.com.workscheduler.database.Worker;
 

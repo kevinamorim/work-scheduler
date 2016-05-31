@@ -28,7 +28,8 @@
         android:layout_below="@+id/textView2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:hint="Name..." />
+        android:hint="Name..."
+        android:paddingTop="10dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -39,7 +40,8 @@
         android:layout_below="@+id/textView3"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:hint="work hours..." />
+        android:hint="work hours..."
+        android:paddingTop="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -50,7 +52,8 @@
         android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="44dp" />
+        android:layout_marginTop="44dp"
+        android:paddingTop="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -60,24 +63,42 @@
         android:id="@+id/textView3"
         android:layout_below="@+id/etWorkerName"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:paddingTop="10dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Worker"
         android:id="@+id/btnAddWorker"
-        android:layout_marginTop="65dp"
-        android:layout_below="@+id/etWorkerWorkHours"
+        android:layout_marginTop="70dp"
+        android:onClick="addWorker"
+        android:layout_below="@+id/etWorkerPhoneNumber"
         android:layout_alignRight="@+id/textView"
-        android:layout_alignEnd="@+id/textView"
-        android:onClick="addWorker" />
+        android:layout_alignEnd="@+id/textView" />
 
-    <Spinner
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/spDaysOfTheWeek"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Phone number"
+        android:id="@+id/textView5"
+        android:layout_below="@+id/etWorkerWorkHours"
+        android:layout_alignLeft="@+id/btnAddWorker"
+        android:layout_alignStart="@+id/btnAddWorker"
+        android:paddingTop="10dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/etWorkerPhoneNumber"
+        android:hint="Phone number..."
+        android:layout_below="@+id/textView5"
+        android:layout_alignLeft="@+id/btnAddWorker"
+        android:layout_alignStart="@+id/btnAddWorker"
+        android:digits="9"
+        android:paddingTop="10dp" />
+
 </RelativeLayout>

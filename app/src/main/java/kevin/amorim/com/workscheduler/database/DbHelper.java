@@ -75,12 +75,13 @@ public class DbHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void insertWorker(String name, int workHours) {
+    public void insertWorker(String name, int workHours, String phoneNumber) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
         contentValues.put(Worker.COLUMN_NAME, name);
         contentValues.put(Worker.COLUMN_WORK_HOURS, workHours);
+        contentValues.put(Worker.COLUMN_PHONE_NUMBER, phoneNumber);
 
         db.insert(Worker.TABLE_NAME, null, contentValues);
 
@@ -121,6 +122,7 @@ public class DbHelper extends SQLiteOpenHelper {
             worker.setId(res.getInt(res.getColumnIndex(Worker.COLUMN_ID)));
             worker.setName(res.getString(res.getColumnIndex(Worker.COLUMN_NAME)));
             worker.setWorkHours(res.getInt(res.getColumnIndex(Worker.COLUMN_WORK_HOURS)));
+            worker.setPhoneNumber(res.getString(res.getColumnIndex(Worker.COLUMN_PHONE_NUMBER)));
 
             list.add(worker);
             res.moveToNext();
