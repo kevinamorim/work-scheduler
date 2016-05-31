@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class ShiftsActivity extends AppCompatActivity {
 
         mDbHelper = new DbHelper(this);
         updateShiftsList();
+        setShiftsListListeners();
     }
 
     private void updateShiftsList() {
@@ -33,6 +35,19 @@ public class ShiftsActivity extends AppCompatActivity {
 
         ShiftItemAdapter adapter = new ShiftItemAdapter(this, shifts);
         lvShifts.setAdapter(adapter);
+    }
+
+    private void setShiftsListListeners() {
+        ListView lvShifts = (ListView) findViewById(R.id.lvShifts);
+
+        lvShifts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(), AddWorkerShiftActivity.class);
+                intent.putExtra(AddWorkerShiftActivity.SHIFT_ID_EXTRA_KEY, (int)id);
+                startActivity(intent);
+            }
+        });
     }
 
     public void goToAddShiftActivity(View view) {

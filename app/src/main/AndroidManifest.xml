@@ -18,7 +18,8 @@
         <activity android:name=".main.WorkersActivity" />
         <activity android:name=".main.AddWorkerActivity" />
         <activity android:name=".main.AddShiftActivity" />
-        <activity android:name=".main.ShiftsActivity"></activity>
+        <activity android:name=".main.ShiftsActivity" />
+        <activity android:name=".main.AddWorkerShiftActivity"></activity>
     </application>
 
 </manifest>

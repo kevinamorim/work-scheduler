@@ -55,6 +55,9 @@ public class DbHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    /*
+        INSERT
+     */
     public void insertWorker(String name, int workHours, String phoneNumber) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -89,29 +92,43 @@ public class DbHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public ArrayList<Worker> getAllWorkers() {
-        ArrayList<Worker> list = new ArrayList<>();
+    public void insertWorkerShift(WorkerShift workerShift) {
+        SQLiteDatabase db = this.getWritableDatabase();
 
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("SELECT * FROM workers", null);
-        res.moveToFirst();
-
-        while(res.isAfterLast() == false) {
-            Worker worker = new Worker();
-
-            worker.setId(res.getInt(res.getColumnIndex(Worker.COLUMN_ID)));
-            worker.setName(res.getString(res.getColumnIndex(Worker.COLUMN_NAME)));
-            worker.setWorkHours(res.getInt(res.getColumnIndex(Worker.COLUMN_WORK_HOURS)));
-            worker.setPhoneNumber(res.getString(res.getColumnIndex(Worker.COLUMN_PHONE_NUMBER)));
-
-            list.add(worker);
-            res.moveToNext();
-        }
+        db.insert(WorkerShift.TABLE_NAME, null, workerShift.getContentValues());
 
         db.close();
-        res.close();
+    }
 
-        return list;
+    /*
+        GET
+     */
+    public ArrayList<Worker> getAllWorkers() {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(SqlQueryCreator.selectAllFrom(Worker.TABLE_NAME), null);
+
+        ArrayList<Worker> result = Worker.getAllFromCursor(c);
+
+        c.close();
+        db.close();
+
+        return result;
+    }
+
+    public Worker getWorkerByName(String name) {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor c = db.rawQuery(SqlQueryCreator.selectAllFromByStringParameter(Worker.TABLE_NAME, Worker.COLUMN_NAME, name), null);
+
+        ArrayList<Worker> result = Worker.getAllFromCursor(c);
+
+        c.close();
+        db.close();
+
+        return (result != null && result.size() > 0) ? result.get(0) : null;
+
     }
 
     public ArrayList<DayOfTheWeek> getAllDaysOfTheWeek() {
@@ -185,6 +202,19 @@ public class DbHelper extends SQLiteOpenHelper {
         db.close();
 
         return list;
+    }
+
+    public ArrayList<WorkerShift> getWorkerShiftsByShiftId(int shiftId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor c = db.rawQuery(SqlQueryCreator.selectAllFromById(WorkerShift.TABLE_NAME, WorkerShift.COLUMN_SHIFT_ID, shiftId), null);
+
+        ArrayList<WorkerShift> result = WorkerShift.getAllFromCursor(c);
+
+        c.close();
+        db.close();
+
+        return result;
     }
 
 }

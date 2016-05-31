@@ -38,6 +38,9 @@ public class WorkerShift {
     /*
         Getters
      */
+    public int getId() { return id; }
+
+    public int getWorkerId() { return workerId; }
 
     /*
         Setters
@@ -49,7 +52,6 @@ public class WorkerShift {
     public ContentValues getContentValues() {
         ContentValues values = new ContentValues();
 
-        values.put(WorkerShift.COLUMN_ID, id);
         values.put(WorkerShift.COLUMN_WORKER_ID, workerId);
         values.put(WorkerShift.COLUMN_SHIFT_ID, shiftId);
 
@@ -85,6 +87,4 @@ public class WorkerShift {
 
         return result;
     }
-
-
 }

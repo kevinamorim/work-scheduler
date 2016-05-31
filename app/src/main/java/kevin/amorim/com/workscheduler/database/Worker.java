@@ -1,5 +1,8 @@
 package kevin.amorim.com.workscheduler.database;
 
+import android.database.Cursor;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -71,4 +74,25 @@ public class Worker {
     }
 
     public String getPhoneNumber() { return phoneNumber; }
+
+    public static ArrayList<Worker> getAllFromCursor(Cursor c) {
+        ArrayList<Worker> result = new ArrayList<>();
+
+        if(c.moveToFirst()) {
+            do {
+
+                int id = c.getInt(c.getColumnIndex(Worker.COLUMN_ID));
+                String name = c.getString(c.getColumnIndex(Worker.COLUMN_NAME));
+                int workHours = c.getInt(c.getColumnIndex(Worker.COLUMN_WORK_HOURS));
+                String phoneNumber = c.getString(c.getColumnIndex(Worker.COLUMN_PHONE_NUMBER));
+
+                Worker worker = new Worker(id, name, workHours, phoneNumber);
+
+                result.add(worker);
+
+            } while(c.moveToNext());
+        }
+
+        return result;
+    }
 }
