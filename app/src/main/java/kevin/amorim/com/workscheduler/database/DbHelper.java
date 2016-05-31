@@ -24,33 +24,13 @@ public class DbHelper extends SQLiteOpenHelper {
         createTable(db, Worker.TABLE_NAME, Worker.getValuesMap());
         createTable(db, DayOfTheWeek.TABLE_NAME, DayOfTheWeek.getValuesMap());
         createTable(db, Shift.TABLE_NAME, Shift.getValuesMap());
+        createTable(db, WorkerShift.TABLE_NAME, WorkerShift.getValuesMap());
 
         seedDatabase(db);
     }
 
     private void createTable(SQLiteDatabase db, String tableName, Map<String, String> values) {
-
-        String query = "CREATE TABLE " + tableName + " (";
-
-        boolean first = true;
-        for(Map.Entry<String, String> entry : values.entrySet()) {
-
-            if(!first) {
-                query += ", ";
-            } else {
-                first = false;
-            }
-
-            String valueName = entry.getKey();
-            String valueType = entry.getValue();
-
-            query += valueName + " " + valueType;
-        }
-
-        query += ");";
-
-        db.execSQL(query);
-
+        db.execSQL(SqlQueryCreator.createTable(tableName, values));
     }
 
     private void seedDatabase(SQLiteDatabase db) {
