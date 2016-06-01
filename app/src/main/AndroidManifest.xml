@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="kevin.amorim.com.workscheduler">
 
+    <uses-permission android:name="android.permission.SEND_SMS" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,7 +21,8 @@
         <activity android:name=".main.AddWorkerActivity" />
         <activity android:name=".main.AddShiftActivity" />
         <activity android:name=".main.ShiftsActivity" />
-        <activity android:name=".main.AddWorkerShiftActivity"></activity>
+        <activity android:name=".main.AddWorkerShiftActivity" />
+        <activity android:name=".main.WorkerDetailsActivity"></activity>
     </application>
 
 </manifest>

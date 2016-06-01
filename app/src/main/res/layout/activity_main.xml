@@ -33,4 +33,16 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:onClick="goToShiftsActivity" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Settings"
+        android:id="@+id/btnGoToSettings"
+        android:layout_below="@+id/btnGoToWorkers"
+        android:layout_alignRight="@+id/btnGoToWorkers"
+        android:layout_alignEnd="@+id/btnGoToWorkers"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

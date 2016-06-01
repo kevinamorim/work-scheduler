@@ -1,5 +1,8 @@
 package kevin.amorim.com.workscheduler.database;
 
+import android.database.Cursor;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,6 +43,25 @@ public class DayOfTheWeek {
 
     public String getName() {
         return name;
+    }
+
+    public static ArrayList<DayOfTheWeek> getAllFromCursor(Cursor c) {
+        ArrayList<DayOfTheWeek> result = new ArrayList<>();
+
+        if(c.moveToFirst()) {
+            do {
+
+                int id = c.getInt(c.getColumnIndex(DayOfTheWeek.COLUMN_ID));
+                String name = c.getString(c.getColumnIndex(DayOfTheWeek.COLUMN_NAME));
+
+                DayOfTheWeek dayOfTheWeek = new DayOfTheWeek(id, name);
+
+                result.add(dayOfTheWeek);
+
+            } while(c.moveToNext());
+        }
+
+        return result;
     }
 
 }

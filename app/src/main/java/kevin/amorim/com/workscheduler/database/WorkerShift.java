@@ -42,6 +42,8 @@ public class WorkerShift {
 
     public int getWorkerId() { return workerId; }
 
+    public int getShiftId() { return shiftId; }
+
     /*
         Setters
      */

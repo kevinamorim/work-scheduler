@@ -1,5 +1,8 @@
 package kevin.amorim.com.workscheduler.database;
 
+import android.database.Cursor;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,6 +61,27 @@ public class Shift {
 
     public String getEndingTime() {
         return endingTime;
+    }
+
+    public static ArrayList<Shift> getAllFromCursor(Cursor c) {
+        ArrayList<Shift> result = new ArrayList<>();
+
+        if(c.moveToFirst()) {
+            do {
+
+                int id = c.getInt(c.getColumnIndex(Shift.COLUMN_ID));
+                int dayOfTheWeekId = c.getInt(c.getColumnIndex(Shift.COLUMN_DAY_OF_THE_WEEK_ID));
+                String startingTime = c.getString(c.getColumnIndex(Shift.COLUMN_STARTING_TIME));
+                String endingTime = c.getString(c.getColumnIndex(Shift.COLUMN_ENDING_TIME));
+
+                Shift shift = new Shift(id, dayOfTheWeekId, startingTime, endingTime);
+
+                result.add(shift);
+
+            } while(c.moveToNext());
+        }
+
+        return result;
     }
 
 }

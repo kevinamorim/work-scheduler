@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -31,6 +32,20 @@ public class WorkersActivity extends AppCompatActivity {
         WorkerItemAdapter adapter = new WorkerItemAdapter(this, workers);
         lvWorkersList.setAdapter(adapter);
 
+        setWorkersListListeners();
+
+    }
+
+    private void setWorkersListListeners() {
+        ListView lvWorkersList = (ListView) findViewById(R.id.lvWorkersList);
+        lvWorkersList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(), WorkerDetailsActivity.class);
+                intent.putExtra(WorkerDetailsActivity.WORKER_ID_EXTRA_KEY, (int)id);
+                startActivity(intent);
+            }
+        });
     }
 
     public void goToAddWorker(View view) {

@@ -91,14 +91,13 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/etWorkerPhoneNumber"
         android:hint="Phone number..."
         android:layout_below="@+id/textView5"
         android:layout_alignLeft="@+id/btnAddWorker"
         android:layout_alignStart="@+id/btnAddWorker"
-        android:digits="9"
-        android:paddingTop="10dp" />
+        android:paddingTop="10dp"
+        android:inputType="phone" />
 
 </RelativeLayout>
