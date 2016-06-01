@@ -207,7 +207,7 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     public ArrayList<Shift> getAllShifts() {
-        ArrayList<Shift> list = new ArrayList<>();
+        ArrayList<Shift> result = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("SELECT * FROM " + Shift.TABLE_NAME, null);
@@ -220,13 +220,17 @@ public class DbHelper extends SQLiteOpenHelper {
                 String endingTime = res.getString(res.getColumnIndex(Shift.COLUMN_ENDING_TIME));
 
                 Shift shift = new Shift(id, dayOfTheWeekId, startingTime, endingTime);
-                list.add(shift);
+                result.add(shift);
             } while(res.moveToNext());
+        }
+
+        for(int i = 0; i < result.size(); i++) {
+            result.get(i).setDayOfTheWeek(getDayOfTheWeekById(result.get(i).getDayOfTheWeekId()));
         }
 
         db.close();
 
-        return list;
+        return result;
     }
 
     public Shift getShiftById(int shiftId) {
@@ -234,6 +238,10 @@ public class DbHelper extends SQLiteOpenHelper {
         Cursor c = db.rawQuery(SqlQueryCreator.selectAllFromById(Shift.TABLE_NAME, Shift.COLUMN_ID, shiftId), null);
 
         ArrayList<Shift> result = Shift.getAllFromCursor(c);
+
+        for(int i = 0; i < result.size(); i++) {
+            result.get(i).setDayOfTheWeek(getDayOfTheWeekById(result.get(i).getDayOfTheWeekId()));
+        }
 
         c.close();
         db.close();
@@ -248,8 +256,8 @@ public class DbHelper extends SQLiteOpenHelper {
         ArrayList<Shift> shifts = new ArrayList<>();
 
         for(int i = 0; i < workerShifts.size(); i++) {
-
             Shift shift = getShiftById(workerShifts.get(i).getShiftId());
+            shift.setDayOfTheWeek(getDayOfTheWeekById(shift.getDayOfTheWeekId()));
             shifts.add(shift);
         }
 

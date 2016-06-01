@@ -30,6 +30,8 @@ public class Shift {
     private String startingTime;
     private String endingTime;
 
+    private DayOfTheWeek dayOfTheWeek;
+
     public Shift() {
 
     }
@@ -47,6 +49,9 @@ public class Shift {
         this.endingTime = endingTime;
     }
 
+    /*
+        Getters
+     */
     public int getId() {
         return id;
     }
@@ -61,6 +66,17 @@ public class Shift {
 
     public String getEndingTime() {
         return endingTime;
+    }
+
+    public DayOfTheWeek getDayOfTheWeek() {
+        return dayOfTheWeek != null ? dayOfTheWeek : new DayOfTheWeek("Error");
+    }
+
+    /*
+        Setters
+     */
+    public void setDayOfTheWeek(DayOfTheWeek dayOfTheWeek) {
+        this.dayOfTheWeek = dayOfTheWeek;
     }
 
     public static ArrayList<Shift> getAllFromCursor(Cursor c) {
@@ -80,6 +96,21 @@ public class Shift {
 
             } while(c.moveToNext());
         }
+
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        String result = "";
+
+        if(dayOfTheWeek != null) {
+            result += dayOfTheWeek.getName();
+        } else {
+            result += "Error";
+        }
+
+        result += startingTime + " - " + endingTime;
 
         return result;
     }

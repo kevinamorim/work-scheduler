@@ -57,7 +57,7 @@ public class ShiftItemAdapter extends BaseAdapter {
         Shift shift = data.get(position);
 
         tvShiftId.setText("" + shift.getId());
-        tvDayOfTheWeekName.setText("" + shift.getDayOfTheWeekId());
+        tvDayOfTheWeekName.setText(shift.getDayOfTheWeek().getName());
         tvStartingTime.setText(shift.getStartingTime());
         tvEndingTime.setText(shift.getEndingTime());
 

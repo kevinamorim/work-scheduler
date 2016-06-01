@@ -1,8 +1,10 @@
 package kevin.amorim.com.workscheduler.main;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -68,6 +70,28 @@ public class WorkerDetailsActivity extends AppCompatActivity {
         ShiftItemAdapter adapter = new ShiftItemAdapter(this, shifts);
         lvSchedule.setAdapter(adapter);
     }
-;
+
+    public void sendSchedule(View view) {
+
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + worker.getPhoneNumber()));
+        intent.putExtra("sms_body", buildSms());
+        startActivity(intent);
+
+    }
+
+    private String buildSms() {
+
+        String message = "Olá, " + worker.getName() + "\n \n";
+
+        ArrayList<Shift> shifts = mDbHelper.getShiftsByWorkerId(worker.getId());
+
+        for(int i = 0; i < shifts.size(); i++) {
+            message += shifts.toString();
+            message += "\n";
+        }
+
+        return message;
+
+    }
 
 }

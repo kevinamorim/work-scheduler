@@ -15,6 +15,7 @@ import java.util.Calendar;
 import kevin.amorim.com.workscheduler.R;
 import kevin.amorim.com.workscheduler.database.DayOfTheWeek;
 import kevin.amorim.com.workscheduler.database.DbHelper;
+import kevin.amorim.com.workscheduler.helpers.TimeHelper;
 
 public class AddShiftActivity extends AppCompatActivity {
 
@@ -101,9 +102,8 @@ public class AddShiftActivity extends AppCompatActivity {
         String selectedDayOfTheWeekName = spDayOfTheWeek.getSelectedItem().toString();
         DayOfTheWeek selectedDayOfTheWeek = mDbHelper.getDayOfTheWeekByName(selectedDayOfTheWeekName);
 
-        String startingTime = startingHour + ":" + startingMinute;
-        String endingTime = endingHour + ":" + endingMinute;
-
+        String startingTime = TimeHelper.formatTimeString(startingHour, startingMinute);
+        String endingTime = TimeHelper.formatTimeString(endingHour, endingMinute);
 
         mDbHelper.insertShift(selectedDayOfTheWeek.getId(), startingTime, endingTime);
     }
