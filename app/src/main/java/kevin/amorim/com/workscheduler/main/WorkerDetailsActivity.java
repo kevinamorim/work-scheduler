@@ -86,7 +86,7 @@ public class WorkerDetailsActivity extends AppCompatActivity {
         ArrayList<Shift> shifts = mDbHelper.getShiftsByWorkerId(worker.getId());
 
         for(int i = 0; i < shifts.size(); i++) {
-            message += shifts.toString();
+            message += shifts.get(i).toString();
             message += "\n";
         }
 

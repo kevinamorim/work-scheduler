@@ -110,6 +110,8 @@ public class Shift {
             result += "Error";
         }
 
+        result += ": ";
+
         result += startingTime + " - " + endingTime;
 
         return result;
