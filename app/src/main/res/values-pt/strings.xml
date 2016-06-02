@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">WorkScheduler</string>
+    <string name="btnGoToShifts">Turnos</string>
+    <string name="btnGoToWorkers">Funcionários</string>
+    <string name="btnGoToSettings">Definições</string>
+    <string name="btnAdd">Adicionar</string>
+    <string name="btnChangeStartingTime">Hora de ínicio</string>
+    <string name="btnChangeEndingTime">Hora de fim</string>
+    <string name="btnSave">Guardar</string>
+
+    <string name="tvNotDefined">Não definido</string>
+    <string name="tvDayOfTheWeek">Dia da Semana</string>
+
+    <!-- Days of the Week -->
+    <string name="monday">Segunda-Feira</string>
+    <string name="tuesday">Terça-Feira</string>
+    <string name="wednesday">Quarta-Feira</string>
+    <string name="thursday">Quinta-Feira</string>
+    <string name="friday">Sexta-Feira</string>
+    <string name="saturday">Sábado</string>
+    <string name="sunday">Domingo</string>
+
+    <!-- Alert Dialogs -->
+    <string name="confirmDelete">Tem a certeza que pretende apagar?</string>
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
+
+</resources>

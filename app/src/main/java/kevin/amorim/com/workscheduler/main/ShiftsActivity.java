@@ -1,5 +1,7 @@
 package kevin.amorim.com.workscheduler.main;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +19,8 @@ import kevin.amorim.com.workscheduler.database.Shift;
 public class ShiftsActivity extends AppCompatActivity {
 
     private DbHelper mDbHelper;
+
+    private int shiftToDeleteId = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,39 @@ public class ShiftsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        lvShifts.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                shiftToDeleteId = (int) id;
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(view.getContext());
+                alertDialogBuilder.setMessage(view.getResources().getString(R.string.confirmDelete));
+                alertDialogBuilder.setPositiveButton(view.getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        deleteShift();
+                    }
+                });
+                alertDialogBuilder.setNegativeButton(view.getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        return;
+                    }
+                });
+
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+
+                return true;
+            }
+        });
+    }
+
+    private void deleteShift() {
+        mDbHelper.deleteShift(shiftToDeleteId);
+        updateShiftsList();
     }
 
     public void goToAddShiftActivity(View view) {

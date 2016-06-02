@@ -49,17 +49,13 @@ public class ShiftItemAdapter extends BaseAdapter {
             vi = inflater.inflate(R.layout.shift_item, null);
         }
 
-        TextView tvShiftId = (TextView) vi.findViewById(R.id.tvShiftId);
         TextView tvDayOfTheWeekName = (TextView) vi.findViewById(R.id.tvDayOfTheWeekName);
-        TextView tvStartingTime = (TextView) vi.findViewById(R.id.tvStartingTime);
-        TextView tvEndingTime = (TextView) vi.findViewById(R.id.tvEndingTime);
+        TextView tvTime = (TextView) vi.findViewById(R.id.tvTime);
 
         Shift shift = data.get(position);
 
-        tvShiftId.setText("" + shift.getId());
         tvDayOfTheWeekName.setText(shift.getDayOfTheWeek().getName());
-        tvStartingTime.setText(shift.getStartingTime());
-        tvEndingTime.setText(shift.getEndingTime());
+        tvTime.setText(shift.getStartingTime() + " - " + shift.getEndingTime());
 
         return vi;
     }

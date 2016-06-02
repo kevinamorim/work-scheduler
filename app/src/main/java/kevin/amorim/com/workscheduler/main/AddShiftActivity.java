@@ -1,6 +1,7 @@
 package kevin.amorim.com.workscheduler.main;
 
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -106,6 +107,9 @@ public class AddShiftActivity extends AppCompatActivity {
         String endingTime = TimeHelper.formatTimeString(endingHour, endingMinute);
 
         mDbHelper.insertShift(selectedDayOfTheWeek.getId(), startingTime, endingTime);
+
+        Intent intent = new Intent(this, ShiftsActivity.class);
+        startActivity(intent);
     }
 
 }

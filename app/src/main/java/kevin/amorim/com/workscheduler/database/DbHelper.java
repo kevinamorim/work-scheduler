@@ -6,9 +6,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Map;
+
+import kevin.amorim.com.workscheduler.R;
 
 public class DbHelper extends SQLiteOpenHelper {
 
@@ -16,8 +17,11 @@ public class DbHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "WorkSchedule.db";
 
+    private Context context;
+
     public DbHelper(Context context) {
-        super(context, DATABASE_NAME, null, 1);
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.context = context;
     }
 
     @Override
@@ -39,13 +43,13 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     private void seedDaysOfTheWeek(SQLiteDatabase db) {
-        insertDayOfTheWeek(db, "Monday");
-        insertDayOfTheWeek(db, "Tuesday");
-        insertDayOfTheWeek(db, "Wednesday");
-        insertDayOfTheWeek(db, "Thursday");
-        insertDayOfTheWeek(db, "Friday");
-        insertDayOfTheWeek(db, "Saturday");
-        insertDayOfTheWeek(db, "Sunday");
+        insertDayOfTheWeek(db, context.getResources().getString(R.string.monday));
+        insertDayOfTheWeek(db, context.getResources().getString(R.string.tuesday));
+        insertDayOfTheWeek(db, context.getResources().getString(R.string.wednesday));
+        insertDayOfTheWeek(db, context.getResources().getString(R.string.thursday));
+        insertDayOfTheWeek(db, context.getResources().getString(R.string.friday));
+        insertDayOfTheWeek(db, context.getResources().getString(R.string.saturday));
+        insertDayOfTheWeek(db, context.getResources().getString(R.string.sunday));
     }
 
     @Override
@@ -98,6 +102,15 @@ public class DbHelper extends SQLiteOpenHelper {
 
         db.insert(WorkerShift.TABLE_NAME, null, workerShift.getContentValues());
 
+        db.close();
+    }
+
+    /*
+        DELETE
+     */
+    public void deleteShift(int shiftId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(Shift.TABLE_NAME, "id = ?", new String[]{Integer.toString(shiftId)});
         db.close();
     }
 

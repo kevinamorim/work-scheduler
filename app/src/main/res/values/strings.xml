@@ -1,3 +1,31 @@
 <resources>
     <string name="app_name">WorkScheduler</string>
+
+    <!-- Button -->
+    <string name="btnGoToShifts">Shifts</string>
+    <string name="btnGoToWorkers">Workers</string>
+    <string name="btnGoToSettings">Settings</string>
+    <string name="btnChangeStartingTime">Starting Time</string>
+    <string name="btnChangeEndingTime">Ending Time</string>
+    <string name="btnAdd">Add</string>
+    <string name="btnSave">Save</string>
+
+    <!-- Text views -->
+    <string name="tvNotDefined">Not set</string>
+    <string name="tvDayOfTheWeek">Day of the Week</string>
+
+    <!-- Days of the Week -->
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+    <string name="sunday">Sunday</string>
+
+    <!-- Alert Dialogs -->
+    <string name="confirmDelete">Are you sure you want to delete?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
 </resources>
