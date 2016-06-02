@@ -24,6 +24,8 @@ public class WorkerShift {
     private int workerId;
     private int shiftId;
 
+    private Worker worker;
+
     public WorkerShift(int id, int workerId, int shiftId) {
         this.id = id;
         this.workerId = workerId;
@@ -44,9 +46,14 @@ public class WorkerShift {
 
     public int getShiftId() { return shiftId; }
 
+    public Worker getWorker() { return worker != null ? worker : new Worker("Erro", -1, "Erro"); }
+
     /*
         Setters
      */
+    public void setWorker(Worker worker) {
+        this.worker = worker;
+    }
 
     /*
         Database helpers

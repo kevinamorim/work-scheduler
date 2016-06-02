@@ -230,7 +230,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
         db.close();
 
-        return result;
+        return Shift.reorder(result);
     }
 
     public Shift getShiftById(int shiftId) {
@@ -263,7 +263,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
         db.close();
 
-        return shifts;
+        return Shift.reorder(shifts);
     }
 
     public ArrayList<WorkerShift> getWorkerShiftsByShiftId(int shiftId) {
@@ -272,6 +272,10 @@ public class DbHelper extends SQLiteOpenHelper {
         Cursor c = db.rawQuery(SqlQueryCreator.selectAllFromById(WorkerShift.TABLE_NAME, WorkerShift.COLUMN_SHIFT_ID, shiftId), null);
 
         ArrayList<WorkerShift> result = WorkerShift.getAllFromCursor(c);
+
+        for(int i = 0; i < result.size(); i++) {
+            result.get(i).setWorker(getWorkerById(result.get(i).getWorkerId()));
+        }
 
         c.close();
         db.close();
@@ -285,6 +289,10 @@ public class DbHelper extends SQLiteOpenHelper {
         Cursor c = db.rawQuery(SqlQueryCreator.selectAllFromById(WorkerShift.TABLE_NAME, WorkerShift.COLUMN_WORKER_ID, workerId), null);
 
         ArrayList<WorkerShift> result = WorkerShift.getAllFromCursor(c);
+
+        for(int i = 0; i < result.size(); i++) {
+            result.get(i).setWorker(getWorkerById(result.get(i).getWorkerId()));
+        }
 
         c.close();
         db.close();

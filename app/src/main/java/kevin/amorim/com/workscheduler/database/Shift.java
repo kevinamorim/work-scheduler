@@ -2,9 +2,12 @@ package kevin.amorim.com.workscheduler.database;
 
 import android.database.Cursor;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import kevin.amorim.com.workscheduler.helpers.TimeHelper;
 
 public class Shift {
 
@@ -113,6 +116,60 @@ public class Shift {
         result += ": ";
 
         result += startingTime + " - " + endingTime;
+
+        return result;
+    }
+
+    public static ArrayList<Shift> reorder(ArrayList<Shift> shifts) {
+        ArrayList<Shift> result = new ArrayList<>();
+        ArrayList<Integer> daysDone = new ArrayList<>();
+
+        int firstDay = 1;
+        int totalDays = 7;
+
+        for(int currentWeekDay = firstDay; currentWeekDay < (totalDays + firstDay); currentWeekDay++) {
+
+            // Build array with days of the current day
+            ArrayList<Shift> tempArray = new ArrayList<>();
+
+            for(int i = 0; i < shifts.size(); i++) {
+                if(shifts.get(i).getDayOfTheWeekId() == currentWeekDay) {
+                    tempArray.add(shifts.get(i));
+                }
+            }
+
+            int count = 0;
+
+            while(count != tempArray.size()) {
+                for(int i = 0; i < shifts.size(); i++) {
+
+                    if(daysDone.contains(i)) {
+                        continue;
+                    }
+
+                    if(shifts.get(i).getDayOfTheWeekId() == currentWeekDay) {
+                        int temp = i;
+                        for(int j = 0; j < shifts.size(); j++) {
+
+                            if(daysDone.contains(j) || j == i) {
+                                continue;
+                            }
+
+                            if(shifts.get(j).getDayOfTheWeekId() == currentWeekDay) {
+                                if(TimeHelper.isTimeLessThan(shifts.get(j).getStartingTime(), shifts.get(temp).getStartingTime())) {
+                                    temp = j;
+                                }
+                            }
+                        }
+
+                        result.add(shifts.get(temp));
+                        daysDone.add(temp);
+                        count++;
+                    }
+                }
+            }
+        }
+
 
         return result;
     }

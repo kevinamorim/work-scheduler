@@ -54,7 +54,7 @@ public class WorkerShiftItemAdapter  extends BaseAdapter {
         WorkerShift workerShift = data.get(position);
 
         tvWorkerShiftId.setText("" + workerShift.getId());
-        tvWorkerId.setText("" + workerShift.getWorkerId());
+        tvWorkerId.setText(workerShift.getWorker().getName());
 
         return vi;
     }

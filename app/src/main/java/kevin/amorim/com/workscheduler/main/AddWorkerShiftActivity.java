@@ -80,8 +80,6 @@ public class AddWorkerShiftActivity extends AppCompatActivity {
             }
         }
 
-        Log.e("AddWorkerShiftActivity", "WorkersToHide: " + workersToHide.size());
-
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item);
 
         for(int i = 0; i < workers.size(); i++) {
@@ -120,6 +118,7 @@ public class AddWorkerShiftActivity extends AppCompatActivity {
         mDbHelper.insertWorkerShift(workerShift);
 
         updateShiftWorkersList();
+        populateWorkersSpinner();
 
     }
 }
