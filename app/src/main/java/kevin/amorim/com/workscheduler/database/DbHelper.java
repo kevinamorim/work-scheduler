@@ -19,6 +19,8 @@ public class DbHelper extends SQLiteOpenHelper {
 
     private Context context;
 
+    private Dao<Worker, String> workers;
+
     public DbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
