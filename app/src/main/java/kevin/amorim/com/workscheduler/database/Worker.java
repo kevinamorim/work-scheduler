@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import kevin.amorim.com.workscheduler.helpers.TimeHelper;
+
 public class Worker {
 
     public static final String TABLE_NAME = "workers";
@@ -18,6 +20,8 @@ public class Worker {
     private String name;
     private int workHours;
     private String phoneNumber;
+
+    private ArrayList<Shift> shifts;
 
     public static final Map<String, String> getValuesMap() {
         Map<String, String> values = new HashMap<>();
@@ -61,6 +65,8 @@ public class Worker {
 
     public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
 
+    public void setShifts(ArrayList<Shift> shifts) { this.shifts = shifts; }
+
     public int getId() {
         return id;
     }
@@ -74,6 +80,16 @@ public class Worker {
     }
 
     public String getPhoneNumber() { return phoneNumber; }
+
+    public int getRemainingHours() {
+        int count = 0;
+
+        for(int i = 0; i < shifts.size(); i++) {
+            count += TimeHelper.countHoursBetween(shifts.get(i).getStartingTime(), shifts.get(i).getEndingTime());
+        }
+
+        return workHours - count;
+    }
 
     public static ArrayList<Worker> getAllFromCursor(Cursor c) {
         ArrayList<Worker> result = new ArrayList<>();

@@ -46,7 +46,7 @@ public class WorkerDetailsActivity extends AppCompatActivity {
         }
 
         if(workerId > -1) {
-            worker = mDbHelper.getWorkerById(workerId);
+            worker = mDbHelper.getWorkerById(workerId, true);
         }
 
     }
@@ -56,7 +56,7 @@ public class WorkerDetailsActivity extends AppCompatActivity {
         tvWorkerName.setText(worker.getName());
 
         TextView tvWorkHours = (TextView) findViewById(R.id.tvWorkHours);
-        tvWorkHours.setText("" + worker.getWorkHours());
+        tvWorkHours.setText("" + worker.getRemainingHours() + "/" + worker.getWorkHours());
 
         TextView tvPhoneNumber = (TextView) findViewById(R.id.tvPhoneNumber);
         tvPhoneNumber.setText(worker.getPhoneNumber());

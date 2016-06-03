@@ -82,19 +82,19 @@ public class AddShiftActivity extends AppCompatActivity {
     };
 
     private void onStartingTimeChanged(int hour, int minute) {
-        TextView tvStartingTime = (TextView) findViewById(R.id.tvStartingTime);
-        tvStartingTime.setText(hour + ":" + minute);
-
         startingHour = hour;
         startingMinute = minute;
+
+        TextView tvStartingTime = (TextView) findViewById(R.id.tvStartingTime);
+        tvStartingTime.setText(TimeHelper.formatTimeString(startingHour, startingMinute));
     }
 
     private void onEndingTimeChanged(int hour, int minute) {
-        TextView tvEndingTime = (TextView) findViewById(R.id.tvEndingTime);
-        tvEndingTime.setText(hour + ":" + minute);
-
         endingHour = hour;
         endingMinute = minute;
+
+        TextView tvEndingTime = (TextView) findViewById(R.id.tvEndingTime);
+        tvEndingTime.setText(TimeHelper.formatTimeString(endingHour, endingMinute));
     }
 
     public void save(View view) {

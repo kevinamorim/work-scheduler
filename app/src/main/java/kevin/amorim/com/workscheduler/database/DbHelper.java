@@ -127,10 +127,14 @@ public class DbHelper extends SQLiteOpenHelper {
         c.close();
         db.close();
 
+        for(int i = 0; i < result.size(); i++) {
+            result.get(i).setShifts(getShiftsByWorkerId(result.get(i).getId()));
+        }
+
         return result;
     }
 
-    public Worker getWorkerById(int id) {
+    public Worker getWorkerById(int id, boolean setShifts) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor c = db.rawQuery(SqlQueryCreator.selectAllFromById(Worker.TABLE_NAME, Worker.COLUMN_ID, id), null);
@@ -139,6 +143,12 @@ public class DbHelper extends SQLiteOpenHelper {
 
         c.close();
         db.close();
+
+        if(setShifts) {
+            for(int i = 0; i < result.size(); i++) {
+                result.get(i).setShifts(getShiftsByWorkerId(result.get(i).getId()));
+            }
+        }
 
         return getSingleFromArrayList(result);
     }
@@ -153,6 +163,10 @@ public class DbHelper extends SQLiteOpenHelper {
 
         c.close();
         db.close();
+
+        for(int i = 0; i < result.size(); i++) {
+            result.get(i).setShifts(getShiftsByWorkerId(result.get(i).getId()));
+        }
 
         return (result != null && result.size() > 0) ? result.get(0) : null;
     }
@@ -263,8 +277,6 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     public ArrayList<Shift> getShiftsByWorkerId(int workerId) {
-        SQLiteDatabase db = this.getReadableDatabase();
-
         ArrayList<WorkerShift> workerShifts = getWorkerShiftsByWorkerId(workerId);
         ArrayList<Shift> shifts = new ArrayList<>();
 
@@ -273,8 +285,6 @@ public class DbHelper extends SQLiteOpenHelper {
             shift.setDayOfTheWeek(getDayOfTheWeekById(shift.getDayOfTheWeekId()));
             shifts.add(shift);
         }
-
-        db.close();
 
         return Shift.reorder(shifts);
     }
@@ -287,7 +297,7 @@ public class DbHelper extends SQLiteOpenHelper {
         ArrayList<WorkerShift> result = WorkerShift.getAllFromCursor(c);
 
         for(int i = 0; i < result.size(); i++) {
-            result.get(i).setWorker(getWorkerById(result.get(i).getWorkerId()));
+            result.get(i).setWorker(getWorkerById(result.get(i).getWorkerId(), false));
         }
 
         c.close();
@@ -303,12 +313,13 @@ public class DbHelper extends SQLiteOpenHelper {
 
         ArrayList<WorkerShift> result = WorkerShift.getAllFromCursor(c);
 
-        for(int i = 0; i < result.size(); i++) {
-            result.get(i).setWorker(getWorkerById(result.get(i).getWorkerId()));
-        }
-
         c.close();
         db.close();
+
+        for(int i = 0; i < result.size(); i++) {
+            result.get(i).setWorker(getWorkerById(result.get(i).getWorkerId(), false));
+        }
+
 
         return result;
     }

@@ -35,8 +35,8 @@ public class AddWorkerActivity extends AppCompatActivity {
         mDbHelper.insertWorker(workerName, workerWorkHours, workerPhoneNumber);
 
         Intent intent = new Intent(this, WorkersActivity.class);
+        intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
-
     };
 
 

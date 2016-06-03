@@ -14,6 +14,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import kevin.amorim.com.workscheduler.R;
+import kevin.amorim.com.workscheduler.adapters.WorkerItemAdapter;
 import kevin.amorim.com.workscheduler.adapters.WorkerShiftItemAdapter;
 import kevin.amorim.com.workscheduler.database.DayOfTheWeek;
 import kevin.amorim.com.workscheduler.database.DbHelper;
@@ -97,10 +98,15 @@ public class AddWorkerShiftActivity extends AppCompatActivity {
     private void updateShiftWorkersList() {
 
         ArrayList<WorkerShift> workerShifts = mDbHelper.getWorkerShiftsByShiftId(shift.getId());
+        ArrayList<Worker> workers = new ArrayList<>();
+
+        for(int i = 0; i < workerShifts.size(); i++) {
+            workers.add(workerShifts.get(i).getWorker());
+        }
 
         ListView lvShiftWorkers = (ListView) findViewById(R.id.lvShiftWorkers);
 
-        WorkerShiftItemAdapter adapter = new WorkerShiftItemAdapter(this, workerShifts);
+        WorkerItemAdapter adapter = new WorkerItemAdapter(this, workers);
         lvShiftWorkers.setAdapter(adapter);
 
     }

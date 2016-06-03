@@ -48,15 +48,11 @@ public class WorkerItemAdapter extends BaseAdapter {
             vi = inflater.inflate(R.layout.worker_item, null);
         }
 
-        TextView tvWorkerId = (TextView) vi.findViewById(R.id.tvWorkerId);
         TextView tvWorkerName = (TextView) vi.findViewById(R.id.tvWorkerName);
-        TextView tvWorkerWorkHours = (TextView) vi.findViewById(R.id.tvWorkerWorkHours);
 
         Worker worker = data.get(position);
 
-        tvWorkerId.setText("" + worker.getId());
         tvWorkerName.setText(worker.getName());
-        tvWorkerWorkHours.setText("" + worker.getWorkHours());
 
         return vi;
     }

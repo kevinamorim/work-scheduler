@@ -29,11 +29,11 @@ public class TimeHelper {
     public static boolean isTimeLessThan(String timeA, String timeB) {
         boolean result = false;
 
-        int hourA = Integer.parseInt(timeA.substring(0, 2));
-        int minuteA = Integer.parseInt(timeA.substring(3, 5));
+        int hourA = getHourFromTimeString(timeA);
+        int minuteA = getMinuteFromTimeString(timeA);
 
-        int hourB = Integer.parseInt(timeB.substring(0, 2));
-        int minuteB = Integer.parseInt(timeB.substring(3, 5));
+        int hourB = getHourFromTimeString(timeB);
+        int minuteB = getMinuteFromTimeString(timeB);
 
         if(hourA < hourB) {
             result = true;
@@ -46,5 +46,23 @@ public class TimeHelper {
         Log.e(TAG, "A:" + hourA + ":" + minuteA + " vs. " + "B: " + hourB + ":" + minuteB + "(" + result + ")");
 
         return result;
+    }
+
+    public static int countHoursBetween(String timeA, String timeB) {
+        int startTotalMinutes = getHourFromTimeString(timeA) * 60 + getMinuteFromTimeString(timeA);
+        int endTotalMinutes = getHourFromTimeString(timeB) * 60 + getMinuteFromTimeString(timeB);
+
+        int totalMinutes = endTotalMinutes - startTotalMinutes;
+
+
+        return Math.round((float)(totalMinutes/60.0));
+    }
+
+    private static int getHourFromTimeString(String time) {
+        return Integer.parseInt(time.substring(0, 2));
+    }
+
+    private static int getMinuteFromTimeString(String time) {
+        return Integer.parseInt(time.substring(3, 5));
     }
 }

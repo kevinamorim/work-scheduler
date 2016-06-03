@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import kevin.amorim.com.workscheduler.database.Shift;
 
 import kevin.amorim.com.workscheduler.R;
+import kevin.amorim.com.workscheduler.helpers.TimeHelper;
 
 public class ShiftItemAdapter extends BaseAdapter {
 
@@ -52,10 +53,13 @@ public class ShiftItemAdapter extends BaseAdapter {
         TextView tvDayOfTheWeekName = (TextView) vi.findViewById(R.id.tvDayOfTheWeekName);
         TextView tvTime = (TextView) vi.findViewById(R.id.tvTime);
 
+        TextView tvTotalTime = (TextView) vi.findViewById(R.id.tvTotalTime);
+
         Shift shift = data.get(position);
 
         tvDayOfTheWeekName.setText(shift.getDayOfTheWeek().getName());
         tvTime.setText(shift.getStartingTime() + " - " + shift.getEndingTime());
+        tvTotalTime.setText("(" + TimeHelper.countHoursBetween(shift.getStartingTime(), shift.getEndingTime()) + ")");
 
         return vi;
     }

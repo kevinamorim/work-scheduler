@@ -50,8 +50,8 @@ public class WorkersActivity extends AppCompatActivity {
 
     public void goToAddWorker(View view) {
         Intent intent = new Intent(this, AddWorkerActivity.class);
+        intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
-
 
 }
